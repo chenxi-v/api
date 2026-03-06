@@ -1,16 +1,5 @@
 [
   {
-    "key": "wawa_app",
-    "name": "哇哇资源",
-    "api": "./spiders/python/wawa-app.py",
-    "ext": "",
-    "jar": null,
-    "type": "python",
-    "enabled": true,
-    "proxy_enabled": false,
-    "proxy_url": null
-  },
-  {
     "key": "saohuo",
     "name": "骚火资源",
     "api": "./spiders/python/saohuo.py",
@@ -43,4 +32,5 @@
     "proxy_enabled": false,
     "proxy_url": null
   }
+
 ]
