@@ -2,8 +2,10 @@
 爬虫管理 API 接口
 """
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import Optional
+from pathlib import Path
 from app.core.manager import spider_manager
 
 router = APIRouter(prefix="/api/spider", tags=["爬虫管理"])
@@ -22,6 +24,36 @@ class UnloadSpiderRequest(BaseModel):
 
 class SpiderProxyRequest(BaseModel):
     spider_proxy_url: Optional[str] = None
+
+
+@router.get("/file/{spider_type}/{filename}")
+async def get_spider_file(spider_type: str, filename: str):
+    """
+    获取爬虫文件内容
+
+    Args:
+        spider_type: 爬虫类型 (python, javascript)
+        filename: 文件名
+
+    Returns:
+        文件内容
+    """
+    try:
+        base_dir = Path("./spiders")
+        file_path = base_dir / spider_type / filename
+        
+        if not file_path.exists():
+            raise HTTPException(status_code=404, detail="文件不存在")
+        
+        return FileResponse(
+            path=file_path,
+            media_type="text/plain",
+            filename=filename
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.post("/load")
