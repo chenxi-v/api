@@ -6,6 +6,14 @@ pydantic-settings==2.1.0
 
 # HTTP 客户端
 httpx==0.25.0
+requests==2.31.0
+
+# HTML 解析
+pyquery==2.0.0
+lxml==5.1.0
+
+# 加密解密
+pycryptodome==3.20.0
 
 # JavaScript 支持
 PyExecJS==1.5.1
